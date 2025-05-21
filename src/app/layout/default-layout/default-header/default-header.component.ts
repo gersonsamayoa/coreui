@@ -126,4 +126,23 @@ export class DefaultHeaderComponent extends HeaderComponent {
     { id: 4, title: 'Angular Version', value: 100, color: 'success' }
   ];
 
+  user = this.getUser();
+  userName = this.getUserName();
+
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.reload();
+  }
+
+  getUser() {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+  getUserName() {
+    const nombre = localStorage.getItem('nombre');
+    return nombre ? JSON.parse(nombre) : null;
+  }
+
 }

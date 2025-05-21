@@ -36,6 +36,13 @@
       <a cNavLink>
         <svg cIcon class="my-1" name="cilEnvelopeOpen" size="lg"></svg>
       </a>
+      <a cNavLink>
+        {{userName}}
+      </a>
+    </c-header-nav>
+
+     <c-header-nav class="mx-0">
+      <ng-container *ngTemplateOutlet="userDropdown" />
     </c-header-nav>
 
     <c-header-nav class="ms-auto ms-md-0">
@@ -48,9 +55,7 @@
       </div>
     </c-header-nav>
 
-    <c-header-nav class="mx-0">
-      <ng-container *ngTemplateOutlet="userDropdown" />
-    </c-header-nav>
+   
 
   </c-container>
   <c-container [fluid]="true" class="px-4">
@@ -153,7 +158,7 @@
         </a>
       </li>
       <li>
-        <a cDropdownItem routerLink="">
+        <a cDropdownItem routerLink="" (click)="logout()">
           <svg cIcon class="me-2" name="cilAccountLogout"></svg>
           Logout
         </a>
