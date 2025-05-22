@@ -1,7 +1,24 @@
+<c-toaster [placement]="position" class="p-3" position="fixed">
+  <c-toast
+    (timer)="onTimerChange($event)"
+    (visibleChange)="onVisibleChange($event)"
+    [visible]="visible()"
+  >
+    <c-toast-header>
+      <i class="fa-solid fa-chalkboard"></i> &nbsp;
+        Bienvenido 
+    </c-toast-header>
+    <c-toast-body>
+      <p>{{ userName }}!</p>
+      <c-progress thin [value]="percentage()" />
+    </c-toast-body>
+  </c-toast>
+</c-toaster>
+ 
 <c-card class="my-4">
   <c-card-body>
     <c-row>
-      <h1><i class="fa-solid fa-chalkboard"></i> Font Awesome</h1>
+      <h1><i class="fa-solid fa-chalkboard"></i>&nbsp;Pagina de Bienvenida</h1>
          <hr cDropdownDivider />
       <app-widgets-dropdown />
     </c-row>

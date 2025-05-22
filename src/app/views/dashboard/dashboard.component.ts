@@ -17,7 +17,11 @@ import {
   ProgressComponent,
   RowComponent,
   TableDirective,
-  TextColorDirective
+  TextColorDirective,   
+  ToastBodyComponent,
+  ToastComponent,
+  ToasterComponent,
+  ToastHeaderComponent
 } from '@coreui/angular';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
 import { IconDirective } from '@coreui/icons-angular';
@@ -25,6 +29,7 @@ import { IconDirective } from '@coreui/icons-angular';
 import { WidgetsBrandComponent } from '../widgets/widgets-brand/widgets-brand.component';
 import { WidgetsDropdownComponent } from '../widgets/widgets-dropdown/widgets-dropdown.component';
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
+
 
 interface IUser {
   name: string;
@@ -43,7 +48,10 @@ interface IUser {
 @Component({
     templateUrl: 'dashboard.component.html',
     styleUrls: ['dashboard.component.scss'],
-    imports: [WidgetsDropdownComponent, TextColorDirective, CardComponent, CardBodyComponent, RowComponent, ColComponent, ButtonDirective, IconDirective, ReactiveFormsModule, ButtonGroupComponent, FormCheckLabelDirective, ChartjsComponent, NgStyle, CardFooterComponent, GutterDirective, ProgressBarDirective, ProgressComponent, WidgetsBrandComponent, CardHeaderComponent, TableDirective, AvatarComponent]
+    imports: [WidgetsDropdownComponent, TextColorDirective, CardComponent, CardBodyComponent, RowComponent, ColComponent, ButtonDirective, IconDirective, ReactiveFormsModule, ButtonGroupComponent, FormCheckLabelDirective, ChartjsComponent, NgStyle, CardFooterComponent, GutterDirective, ProgressBarDirective, ProgressComponent, WidgetsBrandComponent, CardHeaderComponent, TableDirective, AvatarComponent, ToasterComponent,
+    ToastComponent,
+    ToastHeaderComponent,
+    ToastBodyComponent]
 })
 export class DashboardComponent implements OnInit {
 
@@ -145,9 +153,18 @@ export class DashboardComponent implements OnInit {
     trafficRadio: new FormControl('Month')
   });
 
+    position = 'top-end';
+  visible = signal(false);
+  percentage = signal(0);
+  
+  userName="";
+
   ngOnInit(): void {
     this.initCharts();
     this.updateChartOnColorModeChange();
+    this.toggleToast();
+    this.userName = localStorage.getItem('nombre') || '';
+    this.userName=this.userName.replace(/"/g, '')|| '';
   }
 
   initCharts(): void {
@@ -185,5 +202,18 @@ export class DashboardComponent implements OnInit {
         this.mainChartRef().update();
       });
     }
+  }
+
+  toggleToast() {
+    this.visible.update((value) => !value);
+  }
+
+  onVisibleChange($event: boolean) {
+    this.visible.set($event);
+    this.percentage.set(this.visible() ? this.percentage() : 0);
+  }
+
+  onTimerChange($event: number) {
+    this.percentage.set($event * 25);
   }
 }

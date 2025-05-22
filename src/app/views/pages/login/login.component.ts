@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgStyle, NgIf } from '@angular/common';
+import { NgStyle, NgIf,CommonModule } from '@angular/common';
 import { IconDirective } from '@coreui/icons-angular';
 import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective,AlertComponent  } from '@coreui/angular';
 import { FormsModule } from '@angular/forms';
@@ -11,13 +11,14 @@ import { Router } from '@angular/router';
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle, FormsModule, HttpClientModule, AlertComponent, NgIf],
+    imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle, FormsModule, HttpClientModule, AlertComponent, NgIf,CommonModule],
 })
 export class LoginComponent {
 
   objUser = this.objInit();
   blnError = false;
     visible = true;
+    showPassword = false;
   constructor(private http: HttpClient, private router: Router) { }
 
   login() {

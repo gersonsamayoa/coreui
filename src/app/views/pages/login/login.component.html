@@ -1,17 +1,14 @@
-  <div *ngIf="blnError" style="margin:50px; width: 600px;" class="ms-auto">
-  <c-alert (visibleChange)="onVisibleChange($event)"
-         [visible]="visible"
-         color="danger"
-         dismissible
-         fade
-         variant="solid">
-  <ng-template cTemplateId="alertButtonCloseTemplate">
-    <button (click)="onResetDismiss()" cButtonClose dark></button>
-  </ng-template>
-  <strong>Algo</strong> salio mal!
-</c-alert>
+<div *ngIf="blnError" style="margin:50px; width: 600px;" class="ms-auto">
+  <c-alert (visibleChange)="onVisibleChange($event)" [visible]="visible" color="danger" dismissible fade
+    variant="solid">
+    <ng-template cTemplateId="alertButtonCloseTemplate">
+      <button (click)="onResetDismiss()" cButtonClose dark></button>
+    </ng-template>
+    <i class="fa-solid fa-circle-exclamation"></i>
+    Algo salio mal, revisa tus credenciales o ponte en contacto con el administrador.
+  </c-alert>
 </div>
-  
+
 <div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center">
 
   <c-container breakpoint="md">
@@ -20,8 +17,8 @@
         <c-card-group>
           <c-card class="p-4">
             <c-card-body>
-               <div class="d-flex justify-content-around p-3">
-              <img src="assets/images/simply.png" width="100px" alt="Logo" class="text-center" />
+              <div class="d-flex justify-content-around p-3">
+                <img src="assets/images/simply.png" width="100px" alt="Logo" class="text-center" />
               </div>
               <form cForm>
                 <h1>Login</h1>
@@ -30,18 +27,19 @@
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
-                  <input autoComplete="username" cFormControl placeholder="Username" [(ngModel)]="objUser.username" name="username" />
+                  <input autoComplete="username" cFormControl placeholder="Username" [(ngModel)]="objUser.username"
+                    name="username" />
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
                     <svg cIcon name="cilLockLocked"></svg>
                   </span>
-                  <input
-                    autoComplete="current-password"
-                    cFormControl
-                    placeholder="Password"
-                    type="password" [(ngModel)]="objUser.password" name="password"
-                  />
+                  <input [type]="showPassword ? 'text' : 'password'" autoComplete="current-password" cFormControl
+                    placeholder="Password" type="password" [(ngModel)]="objUser.password" name="password" />
+                  <button type="button" cButton color="light" (click)="showPassword = !showPassword" tabindex="-1"
+                    style="border:none; background:transparent;">
+                    <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                  </button>
                 </c-input-group>
                 <c-row>
                   <c-col xs="6">

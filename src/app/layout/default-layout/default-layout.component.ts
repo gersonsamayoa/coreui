@@ -49,4 +49,29 @@ function isOverflown(element: HTMLElement) {
 })
 export class DefaultLayoutComponent {
   public navItems = [...navItems];
+
+ /*  constructor() {
+    const authData = localStorage['authData'];
+    if (authData) {
+      try {
+        const parsed = JSON.parse(authData);
+        const renameNombreToName = (items: any[]): any[] =>
+          items.map(item => ({
+            ...item,
+            name: item.nombre,
+            hijos: item.hijos ? renameNombreToName(item.hijos) : undefined
+          }));
+
+        this.navItems = parsed.menu.submenus
+          ? renameNombreToName(parsed.menu.submenus)
+          : [];
+        console.log('authData', parsed);
+      } catch (e) {
+        this.navItems = [...navItems];
+      }
+    } else {
+      this.navItems = [...navItems];
+    }
+    console.log(this.navItems);
+  } */
 }
