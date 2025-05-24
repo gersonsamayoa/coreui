@@ -43,8 +43,10 @@
                 </c-input-group>
                 <c-row>
                   <c-col xs="6">
-                    <button cButton class="px-4" color="primary" (click)="login()">
-                      Login
+                    <button cButton class="px-4" color="primary" (click)="login()" [disabled]="isLoading">
+                      <c-spinner *ngIf="isLoading" aria-hidden="true" size="sm"></c-spinner>
+                      <span *ngIf="isLoading">Loading...</span>
+                      <span *ngIf="!isLoading">Login</span>
                     </button>
                   </c-col>
                   <c-col class="text-right" xs="6">

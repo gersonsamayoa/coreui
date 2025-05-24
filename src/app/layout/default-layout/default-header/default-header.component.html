@@ -1,14 +1,8 @@
 <!--<c-header class="mb-4 d-print-none" position="sticky">-->
 <ng-container>
   <c-container [fluid]="true" class="border-bottom px-4">
-    <button
-      [cSidebarToggle]="sidebarId()"
-      cHeaderToggler
-      class="btn"
-      toggle="visible"
-      style="margin-inline-start: -14px;"
-      aria-label="Toggle sidebar navigation"
-    >
+    <button [cSidebarToggle]="sidebarId()" cHeaderToggler class="btn" toggle="visible"
+      style="margin-inline-start: -14px;" aria-label="Toggle sidebar navigation">
       <svg cIcon name="cilMenu" size="lg"></svg>
     </button>
     <c-header-nav class="d-none d-md-flex">
@@ -41,7 +35,7 @@
       </a>
     </c-header-nav>
 
-     <c-header-nav class="mx-0">
+    <c-header-nav class="mx-0">
       <ng-container *ngTemplateOutlet="userDropdown" />
     </c-header-nav>
 
@@ -55,7 +49,7 @@
       </div>
     </c-header-nav>
 
-   
+
 
   </c-container>
   <c-container [fluid]="true" class="px-4">
@@ -67,14 +61,8 @@
 <ng-template #userDropdown>
   <c-dropdown [popperOptions]="{ placement: 'bottom-start' }" variant="nav-item">
     <button [caret]="false" cDropdownToggle class="py-0 pe-0" aria-label="Open user menu">
-      <c-avatar
-        shape="rounded-1"
-        [size]="'md'"
-        src="./assets/images/avatars/8.jpg"
-        status="success"
-        textColor="primary"
-        alt="User avatar"
-      />
+      <c-avatar shape="rounded-1" [size]="'md'" src="./assets/images/avatars/myavatar.jpg" status="success"
+        textColor="primary" alt="User avatar" />
     </button>
     <ul cDropdownMenu class="pt-0 w-auto">
       <li>
@@ -89,6 +77,7 @@
           <c-badge class="ms-2 float-end" color="info"> 42</c-badge>
         </a>
       </li>
+
       <li>
         <a cDropdownItem routerLink="/apps/email/inbox">
           <svg cIcon class="me-2" name="cilEnvelopeOpen"></svg>
@@ -122,6 +111,12 @@
         <a cDropdownItem routerLink="">
           <svg cIcon class="me-2" name="cilUser"></svg>
           Profile
+        </a>
+      </li>
+      <li>
+        <a cDropdownItem [cModalToggle]="changePasswordModal.id">
+          <i class="fa fa-key"></i>
+          Change password
         </a>
       </li>
       <li>
@@ -174,16 +169,36 @@
     </button>
     <div cDropdownMenu>
       @for (mode of colorModes; track mode.name) {
-        <button
-          (click)="colorMode.set(mode.name)"
-          [active]="colorMode()===mode.name"
-          cDropdownItem
-          class="d-flex align-items-center"
-        >
-          <svg cIcon class="me-2" [name]="mode.icon" size="lg"></svg>
-          {{ mode.text }}
-        </button>
+      <button (click)="colorMode.set(mode.name)" [active]="colorMode()===mode.name" cDropdownItem
+        class="d-flex align-items-center">
+        <svg cIcon class="me-2" [name]="mode.icon" size="lg"></svg>
+        {{ mode.text }}
+      </button>
       }
     </div>
   </c-dropdown>
 </ng-template>
+
+<!-- Modal usando referencia de template -->
+<c-modal #changePasswordModal id="changePasswordModal" backdrop="static" >
+  <c-modal-header>
+    <h5 cModalTitle>Cambiar contraseña</h5>
+    <button [cModalToggle]="changePasswordModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <form>
+      <div class="mb-3">
+        <label for="currentPassword" class="form-label">Contraseña actual</label>
+        <input type="password" class="form-control" id="currentPassword" [(ngModel)]="currentPassword" name="currentPassword">
+      </div>
+      <div class="mb-3">
+        <label for="newPassword" class="form-label">Nueva contraseña</label>
+        <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword" name="newPassword">
+      </div>
+    </form>
+  </c-modal-body>
+  <c-modal-footer>
+    <button [cModalToggle]="changePasswordModal.id" cButton color="secondary">Cancelar</button>
+    <button cButton color="primary" (click)="changePassword()">Guardar</button>
+  </c-modal-footer>
+</c-modal>

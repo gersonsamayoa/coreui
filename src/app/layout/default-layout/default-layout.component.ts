@@ -50,7 +50,7 @@ function isOverflown(element: HTMLElement) {
 export class DefaultLayoutComponent {
   public navItems = [...navItems];
 
- /*  constructor() {
+   constructor() {
     const authData = localStorage['authData'];
     if (authData) {
       try {
@@ -59,7 +59,7 @@ export class DefaultLayoutComponent {
           items.map(item => ({
             ...item,
             name: item.nombre,
-            hijos: item.hijos ? renameNombreToName(item.hijos) : undefined
+            children: item.hijos ? renameNombreToName(item.hijos) : undefined
           }));
 
         this.navItems = parsed.menu.submenus
@@ -73,5 +73,7 @@ export class DefaultLayoutComponent {
       this.navItems = [...navItems];
     }
     console.log(this.navItems);
-  } */
+  } 
+
+  
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgStyle, NgIf,CommonModule } from '@angular/common';
 import { IconDirective } from '@coreui/icons-angular';
-import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective,AlertComponent  } from '@coreui/angular';
+import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective,AlertComponent,SpinnerComponent  } from '@coreui/angular';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle, FormsModule, HttpClientModule, AlertComponent, NgIf,CommonModule],
+    imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle, FormsModule, HttpClientModule, AlertComponent, NgIf,CommonModule, SpinnerComponent],
 })
 export class LoginComponent {
 
@@ -19,13 +19,16 @@ export class LoginComponent {
   blnError = false;
     visible = true;
     showPassword = false;
+    isLoading = false;
   constructor(private http: HttpClient, private router: Router) { }
 
   login() {
+     this.isLoading = true;
   const url = 'https://4i3jzllr1l.execute-api.us-east-1.amazonaws.com/dev/login';
   this.http.post<any>(url, this.objUser).subscribe({
     next: (response) => {
       console.log('Login exitoso:', response);
+       this.isLoading = false;
       this.blnError = false;
       this.visible = false;
       localStorage.setItem('token', response.data.token);
@@ -35,6 +38,7 @@ export class LoginComponent {
       this.router.navigate(['/dashboard']);
     },
     error: (error) => {
+      this.isLoading = false;
       this.blnError = true;
       this.visible = true;
       console.error('Error en login:', error);
