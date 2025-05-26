@@ -1,17 +1,13 @@
 <!--sidebar-->
-<c-sidebar
-  #sidebar1="cSidebar"
-  class="d-print-none sidebar sidebar-fixed border-end"
-  colorScheme="dark"
-  id="sidebar1"
-  visible
->
+<c-sidebar #sidebar1="cSidebar" class="d-print-none sidebar sidebar-fixed border-end" colorScheme="dark" id="sidebar1"
+  visible>
   <c-sidebar-header class="border-bottom">
     <c-sidebar-brand [routerLink]="[]">
-    <!--<svg [class]="{icon: false}" cIcon class="sidebar-brand-full" height="32" name="logo" title="CoreUI Logo"></svg>
+      <!--<svg [class]="{icon: false}" cIcon class="sidebar-brand-full" height="32" name="logo" title="CoreUI Logo"></svg>
       <svg cIcon class="sidebar-brand-narrow" height="32" name="signet" title="CoreUI Logo"></svg>-->
-      <img src="assets/images/simply.png" width="100px" alt="Logo" class="sidebar-brand-full" style="margin-left: 60px;" />
-      
+      <img src="assets/images/simply.png" width="100px" alt="Logo" class="sidebar-brand-full"
+        style="margin-left: 60px;" />
+
     </c-sidebar-brand>
   </c-sidebar-header>
 
@@ -20,29 +16,58 @@
   </ng-scrollbar>
 
   @if (!sidebar1.narrow) {
-    <c-sidebar-footer cSidebarToggle="sidebar1" class="border-top d-none d-lg-flex" toggle="unfoldable" style="cursor: pointer;">
-      <button cSidebarToggler aria-label="Toggle sidebar fold"></button>
-    </c-sidebar-footer>
+  <c-sidebar-footer cSidebarToggle="sidebar1" class="border-top d-none d-lg-flex" toggle="unfoldable"
+    style="cursor: pointer;">
+    <button cSidebarToggler aria-label="Toggle sidebar fold"></button>
+  </c-sidebar-footer>
   }
 </c-sidebar>
 
 <!--main-->
 <div class="wrapper d-flex flex-column min-vh-100">
   <!--app-header-->
-  <app-default-header
-    [cShadowOnScroll]="'sm'"
-    class="mb-4 d-print-none header header-sticky p-0 shadow-sm"
-    position="sticky"
-    sidebarId="sidebar1"
-  />
+  <app-default-header (changePassword)="showChangePasswordModal = true" [cShadowOnScroll]="'sm'"
+    class="mb-4 d-print-none header header-sticky p-0 shadow-sm" position="sticky" sidebarId="sidebar1" />
   <!--app-body-->
   <div class="body flex-grow-1">
     <c-container breakpoint="lg" class="h-auto px-4">
       <router-outlet />
     </c-container>
   </div>
+
+  <!-- Modal usando referencia de template -->
+  <c-modal [(visible)]="showChangePasswordModal" id="changePasswordModal" backdrop="static">
+    <c-modal-header>
+      <h5 cModalTitle>Cambiar contraseña</h5>
+      <button cButtonClose (click)="closeChangePasswordModal()"></button>
+    </c-modal-header>
+    <c-modal-body>
+      <form>
+        <div class="mb-3">
+          <label for="currentPassword" class="form-label">Contraseña actual</label>
+          <input type="password" class="form-control" id="currentPassword" [(ngModel)]="currentPassword"
+            name="currentPassword">
+        </div>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">Nueva contraseña</label>
+          <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword" name="newPassword">
+        </div>
+      </form>
+      <p class="text-muted">La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula y un
+        número.</p>
+      <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <p class="text-success" *ngIf="successMessage">{{ successMessage }}</p>
+    </c-modal-body>
+    <c-modal-footer>
+      <button cButton color="secondary" (click)="closeChangePasswordModal()">Cancelar</button>
+      <button cButton color="primary" (click)="changePassword()" [disabled]="isLoading"> 
+        <c-spinner *ngIf="isLoading" aria-hidden="true" size="sm"></c-spinner>
+        <span *ngIf="isLoading">Guardando...</span>
+        <span *ngIf="!isLoading">Guardar</span>
+      </button>
+    </c-modal-footer>
+  </c-modal>
+
   <!--app footer-->
   <app-default-footer />
 </div>
-
-

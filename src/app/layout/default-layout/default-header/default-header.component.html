@@ -114,7 +114,7 @@
         </a>
       </li>
       <li>
-        <a cDropdownItem [cModalToggle]="changePasswordModal.id">
+        <a cDropdownItem (click)="changePassword.emit()">
           <i class="fa fa-key"></i>
           Change password
         </a>
@@ -178,27 +178,3 @@
     </div>
   </c-dropdown>
 </ng-template>
-
-<!-- Modal usando referencia de template -->
-<c-modal #changePasswordModal id="changePasswordModal" backdrop="static" >
-  <c-modal-header>
-    <h5 cModalTitle>Cambiar contraseña</h5>
-    <button [cModalToggle]="changePasswordModal.id" cButtonClose></button>
-  </c-modal-header>
-  <c-modal-body>
-    <form>
-      <div class="mb-3">
-        <label for="currentPassword" class="form-label">Contraseña actual</label>
-        <input type="password" class="form-control" id="currentPassword" [(ngModel)]="currentPassword" name="currentPassword">
-      </div>
-      <div class="mb-3">
-        <label for="newPassword" class="form-label">Nueva contraseña</label>
-        <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword" name="newPassword">
-      </div>
-    </form>
-  </c-modal-body>
-  <c-modal-footer>
-    <button [cModalToggle]="changePasswordModal.id" cButton color="secondary">Cancelar</button>
-    <button cButton color="primary" (click)="changePassword()">Guardar</button>
-  </c-modal-footer>
-</c-modal>

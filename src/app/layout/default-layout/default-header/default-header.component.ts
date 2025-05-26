@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, Output, EventEmitter } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -36,16 +36,11 @@ import { IconDirective } from '@coreui/icons-angular';
 @Component({
     selector: 'app-default-header',
     templateUrl: './default-header.component.html',
-  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, NavItemComponent, NavLinkDirective, RouterLink, RouterLinkActive, NgTemplateOutlet, BreadcrumbRouterComponent, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ButtonDirective,
-    ModalToggleDirective,
-    ModalComponent,
-    ModalHeaderComponent,
-    ModalTitleDirective,
-    ButtonCloseDirective,
-    ModalBodyComponent,
-    ModalFooterComponent, FormsModule],
+  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, NavItemComponent, NavLinkDirective, RouterLink, RouterLinkActive, NgTemplateOutlet, BreadcrumbRouterComponent, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ButtonDirective],
 })
 export class DefaultHeaderComponent extends HeaderComponent {
+
+   @Output() changePassword = new EventEmitter<void>();
 
   readonly #colorModeService = inject(ColorModeService);
   readonly colorMode = this.#colorModeService.colorMode;
@@ -57,8 +52,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   ];
 
 
-currentPassword = '';
-newPassword = '';
+
 
 
   readonly icons = computed(() => {
@@ -166,11 +160,6 @@ newPassword = '';
     return nombre ? JSON.parse(nombre) : null;
   }
 
-  changePassword() {
-  // Aquí tu lógica para cambiar la contraseña
-  // Por ejemplo, llamar a un servicio
-  this.currentPassword = '';
-  this.newPassword = '';
-}
+  
 
 }
