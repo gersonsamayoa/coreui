@@ -53,19 +53,17 @@ function isOverflown(element: HTMLElement) {
     ContainerComponent,
     DefaultFooterComponent,
     DefaultHeaderComponent,
-    IconDirective,
     NgScrollbar,
     RouterOutlet,
     RouterLink,
     ShadowOnScrollDirective,
-    ModalToggleDirective,
     ModalComponent,
     ModalHeaderComponent,
     ModalTitleDirective,
     ButtonCloseDirective,
     ModalBodyComponent,
     ModalFooterComponent, FormsModule, ButtonDirective,
-    HttpClientModule, SpinnerComponent, NgIf, CommonModule, NgStyle
+    HttpClientModule, SpinnerComponent, NgIf, CommonModule
   ]
 })
 export class DefaultLayoutComponent {
@@ -77,6 +75,8 @@ export class DefaultLayoutComponent {
   errorMessage = '';
   successMessage = '';
   isLoading = false;
+  showPassword = false;
+  showNewPassword = false;
 
   constructor(private http: HttpClient) {
     const authData = localStorage['authData'];
@@ -110,7 +110,7 @@ export class DefaultLayoutComponent {
   changePassword() {
     this.errorMessage = '';
     this.successMessage = '';
-      this.isLoading = true;
+    this.isLoading = true;
 
     // Validación de campos vacíos
     if (!this.currentPassword || !this.newPassword) {
@@ -146,6 +146,8 @@ export class DefaultLayoutComponent {
         this.currentPassword = '';
         this.newPassword = '';
         this.isLoading = false;
+        this.showPassword = false;
+        this.showNewPassword = false;
         // Espera 2 segundos y luego cierra el modal y limpia el mensaje
         setTimeout(() => {
           this.showChangePasswordModal = false;
@@ -166,6 +168,8 @@ export class DefaultLayoutComponent {
     this.newPassword = '';
     this.errorMessage = '';
     this.successMessage = '';
+    this.showPassword = false;
+    this.showNewPassword = false;
   }
 }
 

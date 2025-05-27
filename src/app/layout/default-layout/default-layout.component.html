@@ -45,12 +45,25 @@
       <form>
         <div class="mb-3">
           <label for="currentPassword" class="form-label">Contraseña actual</label>
-          <input type="password" class="form-control" id="currentPassword" [(ngModel)]="currentPassword"
-            name="currentPassword">
+          <div class="input-group">
+            <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="currentPassword"
+              [(ngModel)]="currentPassword" name="currentPassword" placeholder="Contraseña actual" />
+            <button type="button" class="btn btn-outline-secondary" (click)="showPassword = !showPassword" tabindex="-1"
+              style="border: none;">
+              <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </button>
+          </div>
         </div>
         <div class="mb-3">
           <label for="newPassword" class="form-label">Nueva contraseña</label>
-          <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword" name="newPassword">
+          <div class="input-group">
+            <input [type]="showNewPassword ? 'text' : 'password'" class="form-control" id="newPassword"
+              [(ngModel)]="newPassword" name="newPassword" placeholder="Nueva contraseña" />
+            <button type="button" class="btn btn-outline-secondary" (click)="showNewPassword = !showNewPassword"
+              tabindex="-1" style="border: none;">
+              <i class="fa" [ngClass]="showNewPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </button>
+          </div>
         </div>
       </form>
       <p class="text-muted">La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula y un
@@ -60,7 +73,7 @@
     </c-modal-body>
     <c-modal-footer>
       <button cButton color="secondary" (click)="closeChangePasswordModal()">Cancelar</button>
-      <button cButton color="primary" (click)="changePassword()" [disabled]="isLoading"> 
+      <button cButton color="primary" (click)="changePassword()" [disabled]="isLoading">
         <c-spinner *ngIf="isLoading" aria-hidden="true" size="sm"></c-spinner>
         <span *ngIf="isLoading">Guardando...</span>
         <span *ngIf="!isLoading">Guardar</span>
