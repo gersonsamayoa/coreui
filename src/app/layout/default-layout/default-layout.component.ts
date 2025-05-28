@@ -80,7 +80,6 @@ export class DefaultLayoutComponent {
 
   constructor(private http: HttpClient) {
     const authData = localStorage['menu'] || localStorage.getItem('menu');
-    console.log('authData', authData);
     if (authData) {
       try {
         const parsed = JSON.parse(authData);
@@ -94,14 +93,12 @@ export class DefaultLayoutComponent {
         this.navItems = parsed.submenus
           ? renameNombreToName(parsed.submenus)
           : [];
-        console.log('authData', parsed);
       } catch (e) {
         this.navItems = [...navItems];
       }
     } else {
       this.navItems = [...navItems];
     }
-    console.log(this.navItems);
   }
 
   openChangePasswordModal() {

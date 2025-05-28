@@ -27,7 +27,6 @@ export class LoginComponent {
     const url = 'https://4i3jzllr1l.execute-api.us-east-1.amazonaws.com/dev/login';
     this.http.post<any>(url, this.objUser).subscribe({
       next: (response) => {
-        console.log('Login exitoso:', response);
         this.isLoading = false;
         this.blnError = false;
         this.visible = false;
@@ -58,7 +57,6 @@ export class LoginComponent {
 
   onVisibleChange(eventValue: boolean) {
     this.visible = eventValue;
-    console.log('onVisibleChange', eventValue);
   }
 
   onResetDismiss() {
