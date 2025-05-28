@@ -79,7 +79,8 @@ export class DefaultLayoutComponent {
   showNewPassword = false;
 
   constructor(private http: HttpClient) {
-    const authData = localStorage['authData'];
+    const authData = localStorage['menu'] || localStorage.getItem('menu');
+    console.log('authData', authData);
     if (authData) {
       try {
         const parsed = JSON.parse(authData);
@@ -90,8 +91,8 @@ export class DefaultLayoutComponent {
             children: item.hijos ? renameNombreToName(item.hijos) : undefined
           }));
 
-        this.navItems = parsed.menu.submenus
-          ? renameNombreToName(parsed.menu.submenus)
+        this.navItems = parsed.submenus
+          ? renameNombreToName(parsed.submenus)
           : [];
         console.log('authData', parsed);
       } catch (e) {
@@ -123,6 +124,7 @@ export class DefaultLayoutComponent {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     if (!passwordRegex.test(this.newPassword)) {
       this.errorMessage = 'La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula y un número.';
+      this.isLoading = false;
       return;
     }
 
@@ -170,6 +172,7 @@ export class DefaultLayoutComponent {
     this.successMessage = '';
     this.showPassword = false;
     this.showNewPassword = false;
+    this.isLoading = false;
   }
 }
 
