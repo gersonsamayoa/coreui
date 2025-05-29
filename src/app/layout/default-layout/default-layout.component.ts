@@ -125,18 +125,13 @@ export class DefaultLayoutComponent {
       return;
     }
 
-    const token = localStorage.getItem('token');
     const url = 'https://4i3jzllr1l.execute-api.us-east-1.amazonaws.com/dev/auth/cambiarContrasena';
     const body = {
       passwordActual: this.currentPassword,
       passwordNueva: this.newPassword
     };
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
 
-    this.http.post<any>(url, body, { headers }).subscribe({
+    this.http.post<any>(url, body).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.usuario.user));
