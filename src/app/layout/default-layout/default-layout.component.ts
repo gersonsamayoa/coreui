@@ -2,12 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { NgStyle, NgIf, CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import {NgIf, CommonModule } from '@angular/common';
 
 
-import { IconDirective } from '@coreui/icons-angular';
+
 import {
   ContainerComponent,
   ShadowOnScrollDirective,
@@ -25,7 +24,7 @@ import {
   ModalFooterComponent,
   ModalHeaderComponent,
   ModalTitleDirective,
-  ModalToggleDirective, SpinnerComponent
+  SpinnerComponent
 } from '@coreui/angular';
 
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
@@ -63,7 +62,7 @@ function isOverflown(element: HTMLElement) {
     ButtonCloseDirective,
     ModalBodyComponent,
     ModalFooterComponent, FormsModule, ButtonDirective,
-    HttpClientModule, SpinnerComponent, NgIf, CommonModule
+    SpinnerComponent, NgIf, CommonModule
   ]
 })
 export class DefaultLayoutComponent {
@@ -79,7 +78,9 @@ export class DefaultLayoutComponent {
   showNewPassword = false;
 
   constructor(private http: HttpClient) {
-    const authData = localStorage['menu'] || localStorage.getItem('menu');
+    const authData = localStorage['menu'] || localStorage.getItem
+    console.log('authData', authData);
+    ('menu');
     if (authData) {
       try {
         const parsed = JSON.parse(authData);
@@ -87,7 +88,8 @@ export class DefaultLayoutComponent {
           items.map(item => ({
             ...item,
             name: item.nombre,
-            children: item.hijos ? renameNombreToName(item.hijos) : undefined
+            children: item.hijos ? renameNombreToName(item.hijos) : undefined,
+            url:item.ruta? item.ruta : undefined
           }));
 
         this.navItems = parsed.submenus

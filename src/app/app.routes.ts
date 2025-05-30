@@ -17,6 +17,21 @@ export const routes: Routes = [
     },
     children: [
       {
+    path: 'app',
+    children: [
+      {
+        path: 'configuracion',
+        children: [
+          {
+            path: 'usuario',
+            loadChildren: () => import('./views/usuarios/routes').then(m => m.routes)
+          }
+        ]
+      }
+    ]
+  },
+      
+      {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
       },
