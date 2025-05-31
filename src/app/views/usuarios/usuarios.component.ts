@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { TableDirective } from '@coreui/angular';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   templateUrl: 'usuarios.component.html',
   styleUrls: ['usuarios.component.scss'],
-  imports: [CommonModule, TableDirective, NgIf],
+  imports: [CommonModule, TableDirective],
 })
 export class UsuariosComponent implements OnInit {
   constructor(private http: HttpClient) {}
