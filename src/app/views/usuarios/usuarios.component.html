@@ -1,31 +1,35 @@
-<h1>Configuración Usuarios</h1>
+<h2><i class="fa-solid fa-user"></i> Configuración Usuarios</h2>
+<hr>
 
 <table cTable hover striped>
   <thead>
   <tr>
     <th scope="col">#</th>
-    <th scope="col">Class</th>
-    <th scope="col">Heading</th>
-    <th scope="col">Heading</th>
+    <th scope="col">Estado</th>
+    <th scope="col">Rol</th>
+    <th scope="col">Usuario</th>
+    <th scope="col">Nombre</th>
+    <th scope="col">Acciones</th>
   </tr>
   </thead>
-  <tbody>
-  <tr>
-    <th scope="row">1</th>
-    <td>Mark</td>
-    <td>Otto</td>
-    <td>&#64;mdo</td>
+<tbody>
+  <tr *ngFor="let usuario of usuarios; let i = index">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+  <span
+    [ngClass]="{
+      'badge-habilitado': usuario.estadoNombre === 'Habilitado',
+      'badge-deshabilitado': usuario.estadoNombre === 'Deshabilitado'
+    }"
+    class="estado-badge"
+  >
+    {{ usuario.estadoNombre ?? '' }}
+  </span>
+</td>
+    <td>{{ usuario.roles }}</td>
+    <td>{{ usuario.user }}</td>
+    <td>{{ usuario.usuarioNombre }}</td>
+    <td><a href="#"><i class="fa-solid fa-key"></i></a>&nbsp; <a href="#"><i class="fa-solid fa-pen"></i></a></td>
   </tr>
-  <tr>
-    <th scope="row">2</th>
-    <td>Jacob</td>
-    <td>Thornton</td>
-    <td>&#64;fat</td>
-  </tr>
-  <tr>
-    <th scope="row">3</th>
-    <td colSpan="2">Larry the Bird</td>
-    <td>&#64;twitter</td>
-  </tr>
-  </tbody>
+</tbody>
 </table>

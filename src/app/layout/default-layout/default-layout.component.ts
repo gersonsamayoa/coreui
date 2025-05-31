@@ -79,7 +79,6 @@ export class DefaultLayoutComponent {
 
   constructor(private http: HttpClient) {
     const authData = localStorage['menu'] || localStorage.getItem
-    console.log('authData', authData);
     ('menu');
     if (authData) {
       try {

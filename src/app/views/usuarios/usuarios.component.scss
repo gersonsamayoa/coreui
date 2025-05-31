@@ -1,0 +1,24 @@
+a{
+    color: var(--primary-color);
+    text-decoration: none;
+}
+.estado-badge {
+  display: inline-block;
+  padding: 0.05em 0.8em;
+  border-radius: 1em;
+  font-size: 0.95em;
+  border: 1.5px solid #0d6efd;
+  min-width: 90px;
+  text-align: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.badge-habilitado {
+  background: #0d6efd;
+  color: #fff;
+}
+
+.badge-deshabilitado {
+  background: transparent;
+  color: #0d6efd;
+}
