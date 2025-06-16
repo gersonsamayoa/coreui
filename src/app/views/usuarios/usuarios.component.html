@@ -1,20 +1,32 @@
 <h2><i class="fa-solid fa-user"></i> Configuración Usuarios</h2>
 <hr>
 
-<!--<table cTable hover striped>
+<table cTable hover striped>
   <thead>
   <tr>
-    <th scope="col">#</th>
-    <th scope="col">Estado</th>
-    <th scope="col">Rol</th>
-    <th scope="col">Usuario</th>
-    <th scope="col">Nombre</th>
-    <th scope="col">Acciones</th>
-  </tr>
+  <th class="col-num" scope="col">#</th>
+  <th>
+    Estado<br>
+    <input [(ngModel)]="filtros.estadoNombre" placeholder="Filtrar Estado">
+  </th>
+  <th>
+    Rol<br>
+    <input [(ngModel)]="filtros.roles" placeholder="Filtrar Rol">
+  </th>
+  <th>
+    Usuario<br>
+    <input [(ngModel)]="filtros.user" placeholder="Filtrar Usuario">
+  </th>
+  <th>
+    Nombre<br>
+    <input [(ngModel)]="filtros.usuarioNombre" placeholder="Filtrar Nombre">
+  </th>
+  <th>Acciones</th>
+</tr>
   </thead>
 <tbody>
-  <tr *ngFor="let usuario of usuarios; let i = index">
-    <th scope="row">{{ i + 1 }}</th>
+  <tr *ngFor="let usuario of usuariosPaginados; let i = index">
+   <th class="col-num" scope="row">{{ (paginaActual - 1) * usuariosPorPagina + i + 1 }}</th>
     <td>
   <span
     [ngClass]="{
@@ -32,36 +44,48 @@
     <td><a href="#"><i class="fa-solid fa-key"></i></a>&nbsp; <a href="#"><i class="fa-solid fa-pen"></i></a></td>
   </tr>
 </tbody>
-</table>-->
 
-<div class="mat-elevation-z8">
+<c-pagination  class="mi-paginador-azul" aria-label="Page navigation">
+  <li cPageItem [disabled]="paginaActual === 1">
+    <a cPageLink (click)="cambiarPaginaCore(paginaActual - 1)" style="cursor:pointer">Anterior</a>
+  </li>
+  <li cPageItem *ngFor="let pagina of totalPaginasArray; let i = index" [active]="paginaActual === pagina">
+    <a cPageLink (click)="cambiarPaginaCore(pagina)" style="cursor:pointer">{{ pagina }}</a>
+  </li>
+  <li cPageItem [disabled]="paginaActual === totalPaginas">
+    <a cPageLink (click)="cambiarPaginaCore(paginaActual + 1)" style="cursor:pointer">Siguiente</a>
+  </li>
+</c-pagination>
+</table>
+
+
+<!--<div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
 
-    <!-- ID -->
+
     <ng-container matColumnDef="menuAdminId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
       <td mat-cell *matCellDef="let element"> {{element.usuarioAdminId}} </td>
     </ng-container>
 
-    <!-- Nombre -->
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
       <td mat-cell *matCellDef="let element"> {{element.usuarioNombre}} </td>
     </ng-container>
 
-    <!-- Usuario -->
+
     <ng-container matColumnDef="user">
       <th mat-header-cell *matHeaderCellDef> Usuario </th>
       <td mat-cell *matCellDef="let element"> {{element.user}} </td>
     </ng-container>
 
-    <!-- Rol -->
+
     <ng-container matColumnDef="rol">
       <th mat-header-cell *matHeaderCellDef> Rol </th>
       <td mat-cell *matCellDef="let element"> {{element.roles}} </td>
     </ng-container>
 
-    <!-- Estado -->
+ 
     <ng-container matColumnDef="estadoNombre">
   <th mat-header-cell *matHeaderCellDef> Estado </th>
   <td mat-cell *matCellDef="let element">
@@ -81,4 +105,4 @@
   </table>
 
   <mat-paginator [pageSizeOptions]="[2,5, 10, 20]" showFirstLastButtons></mat-paginator>
-</div>
+</div>-->

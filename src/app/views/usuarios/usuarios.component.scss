@@ -22,3 +22,27 @@ a{
   background: transparent;
   color: #0d6efd;
 }
+
+th.col-num {
+  width: 40px !important;
+}
+
+
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.mi-paginador-azul .page-link,
+.mi-paginador-azul .page-link:focus,
+.mi-paginador-azul .page-link:active {
+  color: rgb(41.5, 48, 61) !important;
+  border-color: rgb(41.5, 48, 61) !important;
+}
+
+.mi-paginador-azul .page-item.active .page-link {
+  background-color: rgb(41.5, 48, 61) !important;
+  border-color: rgb(41.5, 48, 61) !important;
+  color: #fff !important;
+}
